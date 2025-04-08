@@ -1,0 +1,126 @@
+/* 核心样式规范 - 兼容SD WebUI 1.6+ 主题系统 */
+:root {
+  --sd-plugin-primary: #4CAF50; /* 主色调与SD保持一致 */
+  --sd-text-primary: var(--body-text-color);
+  --sd-bg-hover: rgba(99, 99, 99, 0.2);
+}
+
+/* 下载控制容器 */
+.sd-download-container {
+  display: grid;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: 8px;
+  background: var(--block-background-fill);
+  box-shadow: var(--block-shadow);
+}
+
+/* 主按钮样式 */
+.sd-download-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background: var(--sd-plugin-primary);
+  color: white !important;
+  border-radius: 4px;
+  transition: transform 0.2s ease, opacity 0.3s linear;
+  
+  /* 图标间距 */
+  & svg {
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 0.8rem;
+  }
+  
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+  
+  &:disabled {
+    background: #616161;
+    cursor: not-allowed;
+  }
+}
+
+/* 动态进度条 */
+.sd-progress-bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    display: block;
+    width: var(--progress, 0%);
+    height: 100%;
+    background: var(--sd-plugin-primary);
+    transition: width 0.4s ease-out;
+  }
+}
+
+/* 文件列表预览 */
+.sd-file-list {
+  display: grid;
+  max-height: 300px;
+  overflow-y: auto;
+  
+  &-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--border-color-primary);
+    
+    &:hover {
+      background: var(--sd-bg-hover);
+    }
+    
+    &::before {
+      content: attr(data-format);
+      padding: 0.2rem 0.5rem;
+      background: #61616155;
+      border-radius: 3px;
+      font-size: 0.8em;
+    }
+  }
+}
+
+/* 错误提示增强 */
+.sd-error-message {
+  color: #ff4444;
+  padding: 1rem;
+  background: #ff444422;
+  border: 1px solid #ff444477;
+  border-radius: 4px;
+  animation: sd-shake 0.4s ease;
+}
+
+/* 响应式布局 */
+@media (max-width: 768px) {
+  .sd-download-container {
+    padding: 0.75rem;
+  }
+  
+  .sd-download-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* 关键帧动画 */
+@keyframes sd-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* 暗黑模式适配 */
+.dark .sd-file-list-item::before {
+  background: #ffffff22;
+}
+
+.dark .sd-error-message {
+  background: #ff444411;
+  border-color: #ff444444;
+}
