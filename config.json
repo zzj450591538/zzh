@@ -1,8 +1,10 @@
-// extensions/sd-folder-download/config.json
 {
-  "name": "Folder Download",
-  "version": "1.2.0",
-  "api_endpoint": "/sdapi/v1/folder-download",
-  "allowed_extensions": [".png", ".jpg", ".txt"],
-  "max_size_mb": 500
+  "allowed_paths": [
+    "models/Stable-diffusion",
+    "models/Lora",
+    "outputs/txt2img-images",
+    "outputs/img2img-images",
+    "extensions/sd-webui-file-browser"
+  ],
+  "max_preview_size": 10485760
 }
